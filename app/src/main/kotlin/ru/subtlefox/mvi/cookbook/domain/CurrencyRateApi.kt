@@ -28,9 +28,13 @@ class CurrencyRateApi @Inject constructor() {
             CurrencyRate(
                 from = from,
                 to = to,
-                rate = (to.base / from.base + BigDecimal(System.currentTimeMillis() % 100.0 / 100)).setScale(5, RoundingMode.HALF_EVEN)
+                rate = (to.base / from.base + BigDecimal(System.currentTimeMillis() % 100.0 / 100)).setScale(
+                    5,
+                    RoundingMode.HALF_EVEN
+                )
             )
         }
     }
+
 
 }
