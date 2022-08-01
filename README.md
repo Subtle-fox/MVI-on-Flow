@@ -9,3 +9,7 @@ Simple screen with no actions. Preloads data on start
 ### Sample 2
 
 Screen with periodic updates based on selected currency. Simulated exception for Usd
+
+### Sample 3
+
+Screen with countries list, pagination and navigation
