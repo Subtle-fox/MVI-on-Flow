@@ -1,15 +1,17 @@
 package ru.subtlefox.mvi.cookbook.screens.sample3.mvi.entity
 
-import java.util.UUID
-
 
 data class CountryListState(
     val items: List<Any>,
     val lastPage: Int,
-    val sessionId: UUID
+    val nextPage: Int?
 ) {
     companion object {
-        val INITIAL = CountryListState(listOf(), 0, UUID(0, 0))
+        val INITIAL = CountryListState(
+            items = listOf(),
+            lastPage = 0,
+            nextPage = null
+        )
     }
 
     data class CountryItem(

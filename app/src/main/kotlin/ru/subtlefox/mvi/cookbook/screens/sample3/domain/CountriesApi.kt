@@ -11,17 +11,22 @@ import javax.inject.Singleton
 /*
  *   Stub api to "fetch" countries list
  *
- *   Simulates IoException if page == 4
+ *   Simulates IoException if page == `errorPage`
  */
 
 @Singleton
 class CountriesApi @Inject constructor() {
 
+    private var errorPage = 1
+
     suspend fun getCountryList(page: Int, count: Int): List<Locale> {
         return withContext(Dispatchers.IO) {
             delay(2000)
 
-            if (page >= 0 ) throw IOException("Simulated Error")
+            if (page == errorPage ) {
+                errorPage++
+                throw IOException("Simulated Error")
+            }
 
             val locales = Locale.getAvailableLocales()
                 .filter { it.country.length == 2 }

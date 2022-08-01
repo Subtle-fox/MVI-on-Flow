@@ -17,5 +17,5 @@ class CurrencyListFeature @Inject constructor(
     actor = actor,
     eventProducer = CountryListEventProducer,
     reducer = CountryListReducer,
-    tagPostfix = "CurrencyList"
+    tagPostfix = "CountryList"
 )

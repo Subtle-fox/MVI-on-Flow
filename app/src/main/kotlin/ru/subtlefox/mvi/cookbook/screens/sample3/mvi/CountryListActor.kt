@@ -2,6 +2,8 @@ package ru.subtlefox.mvi.cookbook.screens.sample3.mvi
 
 
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import ru.subtlefox.mvi.cookbook.screens.sample3.domain.CountriesApi
@@ -17,6 +19,14 @@ class CountryListActor @Inject constructor(
 
     companion object {
         const val PAGE_SIZE = 20
+
+        internal fun CountriesApi.loadPage(page: Int) = flow {
+            emit(CountryListEffect.PageLoading(page))
+            val countries = getCountryList(page, PAGE_SIZE)
+            emit(CountryListEffect.PageData(countries, page))
+        }.catch {
+            emit(CountryListEffect.Error(page))
+        }
     }
 
     override fun invoke(action: CountryListAction, previousState: CountryListState): Flow<CountryListEffect> =
@@ -24,25 +34,15 @@ class CountryListActor @Inject constructor(
 
             is CountryListAction.Refresh -> flow {
                 emit(CountryListEffect.PageData(emptyList(), page = 0))
-                val effect = loadPage(page = 0)
-                emit(effect)
+                emitAll(countriesApi.loadPage(page = 0))
             }
 
-            is CountryListAction.LoadPage -> flow {
-                emit(CountryListEffect.PageLoading(action.page))
-                val effect = loadPage(action.page)
-                emit(effect)
-            }
+            is CountryListAction.LoadPage ->
+                countriesApi.loadPage(action.page)
 
             is CountryListAction.OpenCurrencyRatesForCountry ->
                 flowOf(CountryListEffect.OpenCurrencyRatesForCountry(action.countryIso))
 
         }
 
-    private suspend fun loadPage(page: Int): CountryListEffect = try {
-        val countries = countriesApi.getCountryList(page, PAGE_SIZE)
-        CountryListEffect.PageData(countries, page)
-    } catch (_: Exception) {
-        CountryListEffect.Error(page)
-    }
 }

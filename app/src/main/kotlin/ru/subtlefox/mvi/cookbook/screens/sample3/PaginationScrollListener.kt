@@ -24,7 +24,7 @@ abstract class PaginationScrollListener(var layoutManager: LinearLayoutManager) 
     private var loading = true
 
     // Sets the starting page index
-    private val startingPageIndex = -1
+    private val startingPageIndex = 0
 
     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
         val visibleItemCount = layoutManager.childCount
@@ -49,11 +49,12 @@ abstract class PaginationScrollListener(var layoutManager: LinearLayoutManager) 
         // the visibleThreshold and need to reload more data.
         // If we do need to reload some more data, we execute onLoadMore to fetch the data.
         if (!loading && firstVisibleItem + visibleItemCount + visibleThreshold >= totalItemCount) {
-            loading = onLoadMore(currentPage + 1, totalItemCount)
+            loading = true
+            onLoadMore()
         }
     }
 
     // Defines the process for actually loading more data based on page
     // Returns true if more data is being loaded; returns false if there is no more data to load.
-    abstract fun onLoadMore(page: Int, totalItemsCount: Int): Boolean
+    abstract fun onLoadMore()
 }

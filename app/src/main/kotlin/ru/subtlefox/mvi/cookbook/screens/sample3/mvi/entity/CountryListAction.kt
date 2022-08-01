@@ -3,7 +3,9 @@ package ru.subtlefox.mvi.cookbook.screens.sample3.mvi.entity
 
 sealed class CountryListAction {
 
-    object Refresh : CountryListAction()
+    object Refresh : CountryListAction() {
+        override fun toString() = "Refresh list"
+    }
 
     data class LoadPage(
         val page: Int
