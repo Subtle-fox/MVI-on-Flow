@@ -2,9 +2,11 @@
 
 #end
 
-import ${PACKAGE_NAME}.entity.${NAME}Effect
-import ${PACKAGE_NAME}.entity.${NAME}Event
-import ru.subtlefox.mvi.flow.MviEventProducer
+#parse("Mvi package.java")
+
+import ${PACKAGE_NAME}.mvi.entity.${NAME}Effect
+import ${PACKAGE_NAME}.mvi.entity.${NAME}Event
+import ${MVI_PACKAGE}.MviEventProducer
 
 #parse("File Header.java")
 object ${NAME}EventProducer : MviEventProducer<${NAME}Effect, ${NAME}Event> {

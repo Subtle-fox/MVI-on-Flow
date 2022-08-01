@@ -2,13 +2,15 @@
 
 #end
 
+#parse("Mvi package.java")
+
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
-import ${PACKAGE_NAME}.entity.${NAME}Action
-import ${PACKAGE_NAME}.entity.${NAME}Effect
-import ${PACKAGE_NAME}.entity.${NAME}State
-import ru.subtlefox.mvi.flow.MviActor
+import ${PACKAGE_NAME}.mvi.entity.${NAME}Action
+import ${PACKAGE_NAME}.mvi.entity.${NAME}Effect
+import ${PACKAGE_NAME}.mvi.entity.${NAME}State
+import ${MVI_PACKAGE}.MviActor
 import javax.inject.Inject
 
 #parse("File Header.java")
@@ -21,12 +23,12 @@ class ${NAME}Actor @Inject constructor(
         previousState: ${NAME}State
     ): Flow<${NAME}Effect> {
         return when (action) {
-            is ${NAME}Action.Stub -> flow<XEffect> {
+            is ${NAME}Action.Stub -> flow<${NAME}Effect> {
                 // Paste business logic here
-                emit(XEffect.Stub)
+                emit(${NAME}Effect.Stub)
             }
         }.catch {
-            emit(XEffect.Error(it))
+            emit(${NAME}Effect.Error(it))
         }
     }
 }

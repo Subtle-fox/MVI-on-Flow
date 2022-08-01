@@ -2,11 +2,11 @@
 
 #end
 
-import ${PACKAGE_NAME}.entity.${NAME}Effect
-import ${PACKAGE_NAME}.entity.${NAME}State
-import ru.subtlefox.mvi.flow.MviReducer
+#parse("Mvi package.java")
 
-${MVI_MODULE_NAME}
+import ${PACKAGE_NAME}.mvi.entity.${NAME}Effect
+import ${PACKAGE_NAME}.mvi.entity.${NAME}State
+import ${MVI_PACKAGE}.MviReducer
 
 #parse("File Header.java")
 object ${NAME}Reducer : MviReducer<${NAME}Effect, ${NAME}State> {

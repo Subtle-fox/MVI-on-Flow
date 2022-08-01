@@ -1,0 +1,6 @@
+Copy both "fileTemplates" and "options" folders to the root of Android Studio config folder:
+
+Example:
+    MacOS: Application Support/Google/AndroidStudio2021.2
+
+Finally, you will see new option on a project folders context menu: New... -> MviTemplate
