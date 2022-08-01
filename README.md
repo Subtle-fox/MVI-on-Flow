@@ -10,6 +10,16 @@ Simple screen with no actions. Preloads data on start
 
 Screen with periodic updates based on selected currency. Simulated exception for Usd
 
+https://user-images.githubusercontent.com/5879172/182160594-676b36fc-820a-4cfb-beac-807ce7d35d96.mov
+
+
 ### Sample 3
 
 Screen with countries list, pagination and navigation
+
+
+https://user-images.githubusercontent.com/5879172/182159683-c0233c1e-db4c-4c96-b524-5b7b5fccd92d.mov
+
+
+
+
