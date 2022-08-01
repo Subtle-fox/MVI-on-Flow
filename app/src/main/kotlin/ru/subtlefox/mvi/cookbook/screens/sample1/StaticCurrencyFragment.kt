@@ -8,7 +8,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
-import ru.subtlefox.mvi.cookbook.screens.sample1.entities.StaticCurrencyState
+import ru.subtlefox.mvi.cookbook.screens.sample1.mvi.entitiy.StaticCurrencyState
 import ru.subtlefox.mvi.cookbook.screens.sample1.mvi.StaticCurrencyFeature
 import javax.inject.Inject
 import ru.subtlefox.mvi.cookbook.databinding.FragmentSample1Binding as Binding

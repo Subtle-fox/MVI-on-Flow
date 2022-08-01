@@ -1,7 +1,7 @@
 package ru.subtlefox.mvi.cookbook.screens.sample2.mvi
 
-import ru.subtlefox.mvi.cookbook.screens.sample2.entities.DynamicCurrencyEffect
-import ru.subtlefox.mvi.cookbook.screens.sample2.entities.DynamicCurrencyEvent
+import ru.subtlefox.mvi.cookbook.screens.sample2.mvi.entitiy.DynamicCurrencyEffect
+import ru.subtlefox.mvi.cookbook.screens.sample2.mvi.entitiy.DynamicCurrencyEvent
 import ru.subtlefox.mvi.flow.MviEventProducer
 
 object DynamicCurrencyEventProducer : MviEventProducer<DynamicCurrencyEffect, DynamicCurrencyEvent> {

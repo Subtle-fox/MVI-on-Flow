@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.flow
 import ru.subtlefox.mvi.cookbook.domain.CurrencyRateApi
 import ru.subtlefox.mvi.cookbook.domain.model.Currency
 import ru.subtlefox.mvi.cookbook.screens.sample2.data.CurrencyRepository
-import ru.subtlefox.mvi.cookbook.screens.sample2.entities.DynamicCurrencyEffect
+import ru.subtlefox.mvi.cookbook.screens.sample2.mvi.entitiy.DynamicCurrencyEffect
 import ru.subtlefox.mvi.flow.MviBootstrap
 import javax.inject.Inject
 

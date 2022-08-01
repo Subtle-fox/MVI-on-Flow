@@ -19,8 +19,6 @@ import javax.inject.Inject
 class CurrencyRateApi @Inject constructor() {
 
     suspend fun getRate(from: Currency, to: Currency): CurrencyRate {
-        println("api call $from -> $to")
-
         return withContext(Dispatchers.IO) {
             if (from == to) throw IOException("Simulated Error")
 

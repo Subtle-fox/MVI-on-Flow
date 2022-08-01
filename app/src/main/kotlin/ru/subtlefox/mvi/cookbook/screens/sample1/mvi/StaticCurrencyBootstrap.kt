@@ -4,7 +4,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import ru.subtlefox.mvi.cookbook.domain.CurrencyRateApi
 import ru.subtlefox.mvi.cookbook.domain.model.Currency
-import ru.subtlefox.mvi.cookbook.screens.sample1.entities.StaticCurrencyEffect
+import ru.subtlefox.mvi.cookbook.screens.sample1.mvi.entitiy.StaticCurrencyEffect
 import ru.subtlefox.mvi.flow.MviBootstrap
 import javax.inject.Inject
 

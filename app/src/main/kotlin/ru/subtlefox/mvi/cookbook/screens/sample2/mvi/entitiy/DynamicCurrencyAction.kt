@@ -1,4 +1,4 @@
-package ru.subtlefox.mvi.cookbook.screens.sample2.entities
+package ru.subtlefox.mvi.cookbook.screens.sample2.mvi.entitiy
 
 import ru.subtlefox.mvi.cookbook.domain.model.Currency
 

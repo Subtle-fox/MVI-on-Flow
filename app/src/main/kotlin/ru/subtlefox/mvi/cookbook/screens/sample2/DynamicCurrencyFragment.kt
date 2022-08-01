@@ -10,9 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
-import ru.subtlefox.mvi.cookbook.screens.sample2.entities.DynamicCurrencyAction
-import ru.subtlefox.mvi.cookbook.screens.sample2.entities.DynamicCurrencyEvent
-import ru.subtlefox.mvi.cookbook.screens.sample2.entities.DynamicCurrencyState
+import ru.subtlefox.mvi.cookbook.screens.sample2.mvi.entitiy.DynamicCurrencyAction
+import ru.subtlefox.mvi.cookbook.screens.sample2.mvi.entitiy.DynamicCurrencyEvent
+import ru.subtlefox.mvi.cookbook.screens.sample2.mvi.entitiy.DynamicCurrencyState
 import ru.subtlefox.mvi.cookbook.databinding.FragmentSample2Binding as Binding
 
 @AndroidEntryPoint

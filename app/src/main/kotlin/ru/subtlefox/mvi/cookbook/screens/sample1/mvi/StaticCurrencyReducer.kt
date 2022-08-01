@@ -1,8 +1,8 @@
 package ru.subtlefox.mvi.cookbook.screens.sample1.mvi
 
 import ru.subtlefox.mvi.cookbook.domain.model.Currency
-import ru.subtlefox.mvi.cookbook.screens.sample1.entities.StaticCurrencyEffect
-import ru.subtlefox.mvi.cookbook.screens.sample1.entities.StaticCurrencyState
+import ru.subtlefox.mvi.cookbook.screens.sample1.mvi.entitiy.StaticCurrencyEffect
+import ru.subtlefox.mvi.cookbook.screens.sample1.mvi.entitiy.StaticCurrencyState
 import ru.subtlefox.mvi.flow.MviReducer
 import java.math.BigDecimal
 import java.math.RoundingMode

@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import ru.subtlefox.mvi.cookbook.screens.sample2.entities.DynamicCurrencyAction
 import ru.subtlefox.mvi.cookbook.screens.sample2.mvi.DynamicCurrencyFeature
+import ru.subtlefox.mvi.cookbook.screens.sample2.mvi.entitiy.DynamicCurrencyAction
 import javax.inject.Inject
 
 @HiltViewModel

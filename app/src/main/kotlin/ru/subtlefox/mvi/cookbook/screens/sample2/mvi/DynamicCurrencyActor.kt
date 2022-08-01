@@ -4,9 +4,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import ru.subtlefox.mvi.cookbook.domain.model.Currency
 import ru.subtlefox.mvi.cookbook.screens.sample2.data.CurrencyRepository
-import ru.subtlefox.mvi.cookbook.screens.sample2.entities.DynamicCurrencyAction
-import ru.subtlefox.mvi.cookbook.screens.sample2.entities.DynamicCurrencyEffect
-import ru.subtlefox.mvi.cookbook.screens.sample2.entities.DynamicCurrencyState
+import ru.subtlefox.mvi.cookbook.screens.sample2.mvi.entitiy.DynamicCurrencyAction
+import ru.subtlefox.mvi.cookbook.screens.sample2.mvi.entitiy.DynamicCurrencyEffect
+import ru.subtlefox.mvi.cookbook.screens.sample2.mvi.entitiy.DynamicCurrencyState
 import ru.subtlefox.mvi.flow.MviActor
 import javax.inject.Inject
 

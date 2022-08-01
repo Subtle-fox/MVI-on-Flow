@@ -1,4 +1,4 @@
-package ru.subtlefox.mvi.cookbook.screens.sample1.entities
+package ru.subtlefox.mvi.cookbook.screens.sample1.mvi.entitiy
 
 sealed class StaticCurrencyState {
     data class Data(
