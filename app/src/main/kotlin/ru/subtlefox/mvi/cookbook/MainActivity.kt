@@ -39,17 +39,12 @@ class MainActivity : AppCompatActivity() {
             setOf(
                 R.id.nav_sample_1,
                 R.id.nav_sample_2,
+                R.id.nav_sample_3,
             ),
             drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.main, menu)
-        return true
     }
 
     override fun onSupportNavigateUp(): Boolean {

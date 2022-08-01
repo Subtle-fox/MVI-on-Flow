@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_sample_1">
+    app:startDestination="@+id/nav_sample_3">
 
     <fragment
         android:id="@+id/nav_sample_1"
@@ -14,5 +14,15 @@
         android:id="@+id/nav_sample_2"
         android:name="ru.subtlefox.mvi.cookbook.screens.sample2.DynamicCurrencyFragment"
         tools:layout="@layout/fragment_sample_2" />
+
+    <fragment
+        android:id="@+id/nav_sample_3"
+        android:name="ru.subtlefox.mvi.cookbook.screens.sample3.CountryListFragment"
+        tools:layout="@layout/fragment_sample_3">
+
+        <action
+            android:id="@+id/to_dynamic_currency_list"
+            app:destination="@id/nav_sample_2" />
+    </fragment>
 
 </navigation>

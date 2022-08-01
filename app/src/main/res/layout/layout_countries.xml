@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="60dp"
-    android:paddingHorizontal="24dp"
+    android:paddingHorizontal="16dp"
     android:paddingVertical="8dp"
     app:layout_constraintHorizontal_chainStyle="spread_inside">
 
@@ -13,72 +13,54 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.2" />
+        app:layout_constraintGuide_percent="0.15" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_end"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.8" />
+        app:layout_constraintGuide_percent="0.7" />
 
     <TextView
-        android:id="@+id/src_amount"
+        android:id="@+id/iso"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
         android:textAlignment="textEnd"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guideline_start"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="1" />
+        tools:text="RU" />
 
     <TextView
-        android:id="@+id/src_currency"
-        android:layout_width="wrap_content"
+        android:id="@+id/name"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:ellipsize="end"
+        android:lines="1"
         android:textAlignment="textStart"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="usd" />
+        tools:text="Россия" />
 
     <TextView
-        android:id="@+id/arrow"
-        android:layout_width="wrap_content"
+        android:id="@+id/language"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="➔"
-        android:textAlignment="center"
+        android:layout_marginStart="8dp"
+        android:ellipsize="end"
+        android:lines="1"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="HardcodedText" />
-
-    <TextView
-        android:id="@+id/dst_amount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/guideline_end"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="60" />
-
-    <TextView
-        android:id="@+id/dst_currency"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@id/guideline_end"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="rub" />
+        tools:text="Русский" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
