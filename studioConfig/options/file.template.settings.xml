@@ -1,0 +1,24 @@
+<application>
+  <component name="ExportableFileTemplateSettings">
+    <default_templates>
+      <template name="MviTemplate.kt" file-name="mvi/${NAME}MviFeature" reformat="true" live-template-enabled="false">
+        <template name="MviTemplate.kt.child.0.kt" file-name="mvi/${NAME}EventProducer" reformat="true" live-template-enabled="false" />
+        <template name="MviTemplate.kt.child.1.kt" file-name="mvi/${NAME}Actor" reformat="true" live-template-enabled="false" />
+        <template name="MviTemplate.kt.child.2.kt" file-name="mvi/${NAME}Bootstrap" reformat="true" live-template-enabled="false" />
+        <template name="MviTemplate.kt.child.3.kt" file-name="mvi/entity/${NAME}Event" reformat="true" live-template-enabled="false" />
+        <template name="MviTemplate.kt.child.4.kt" file-name="mvi/entity/${NAME}Effect" reformat="true" live-template-enabled="false" />
+        <template name="MviTemplate.kt.child.5.kt" file-name="mvi/entity/${NAME}Action" reformat="true" live-template-enabled="false" />
+        <template name="MviTemplate.kt.child.6.kt" file-name="mvi/entity/${NAME}State" reformat="true" live-template-enabled="false" />
+        <template name="MviTemplate.kt.child.7.kt" file-name="mvi/${NAME}Reducer" reformat="true" live-template-enabled="false" />
+      </template>
+      <template name="MviTemplate.kt.child.0.kt" file-name="mvi/${NAME}EventProducer" reformat="true" live-template-enabled="false" />
+      <template name="MviTemplate.kt.child.1.kt" file-name="mvi/${NAME}Actor" reformat="true" live-template-enabled="false" />
+      <template name="MviTemplate.kt.child.2.kt" file-name="mvi/${NAME}Bootstrap" reformat="true" live-template-enabled="false" />
+      <template name="MviTemplate.kt.child.3.kt" file-name="mvi/entity/${NAME}Event" reformat="true" live-template-enabled="false" />
+      <template name="MviTemplate.kt.child.4.kt" file-name="mvi/entity/${NAME}Effect" reformat="true" live-template-enabled="false" />
+      <template name="MviTemplate.kt.child.5.kt" file-name="mvi/entity/${NAME}Action" reformat="true" live-template-enabled="false" />
+      <template name="MviTemplate.kt.child.6.kt" file-name="mvi/entity/${NAME}State" reformat="true" live-template-enabled="false" />
+      <template name="MviTemplate.kt.child.7.kt" file-name="mvi/${NAME}Reducer" reformat="true" live-template-enabled="false" />
+    </default_templates>
+  </component>
+</application>
