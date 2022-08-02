@@ -25,4 +25,9 @@
             app:destination="@id/nav_sample_2" />
     </fragment>
 
+    <fragment
+        android:id="@+id/nav_sample_4"
+        android:name="ru.subtlefox.mvi.cookbook.screens.sample4.RaceConditionFragment"
+        tools:layout="@layout/fragment_sample_4" />
+
 </navigation>

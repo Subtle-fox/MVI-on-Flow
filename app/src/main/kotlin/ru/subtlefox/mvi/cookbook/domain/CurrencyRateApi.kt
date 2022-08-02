@@ -33,6 +33,4 @@ class CurrencyRateApi @Inject constructor() {
             )
         }
     }
-
-
 }

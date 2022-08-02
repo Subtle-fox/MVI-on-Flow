@@ -26,7 +26,6 @@ object DynamicCurrencyReducer : MviReducer<DynamicCurrencyEffect, DynamicCurrenc
                 dstCurrency = getCurrencyName(to),
                 srcAmount = "1",
                 dstAmount = rate?.let(::getRoundedRate).orEmpty(),
-                onChangeAction = { to }
             )
         }
     }

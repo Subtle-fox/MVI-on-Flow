@@ -47,7 +47,7 @@ open class MviFeature<Action : Any, Effect : Any, State : Any, Event : Any>(
 
     companion object {
         private const val TAG_PREFIX = "Mvi-"
-        private const val ACTIONS_BUFFER_SIZE = 20
+        private const val ACTIONS_BUFFER_SIZE = 5
         private const val EVENTS_BUFFER_SIZE = 20
     }
 
