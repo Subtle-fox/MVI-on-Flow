@@ -74,8 +74,7 @@ class DynamicCurrencyFragment : Fragment() {
             is DynamicCurrencyState.Data -> with(binding.content) {
                 binding.progress.isVisible = false
                 binding.changeCurrencyButton.setOnClickListener {
-                    val currentValue = state.onChangeAction()
-                    onAction(DynamicCurrencyAction.ChangeCurrency(currentValue))
+                    onAction(DynamicCurrencyAction.ChangeCurrency)
                 }
 
                 srcCurrency.text = state.srcCurrency

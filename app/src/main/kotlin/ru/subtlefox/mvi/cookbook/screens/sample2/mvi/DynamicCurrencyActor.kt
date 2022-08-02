@@ -28,8 +28,9 @@ class DynamicCurrencyActor @Inject constructor(
     private suspend fun changeCurrency(action: DynamicCurrencyAction.ChangeCurrency) {
         // Just cycle through currency's values:
 
+        val currentCurrency = repository.currentCurrency.value
         val newValue = Currency.values().let { array ->
-            val currentIndex = array.indexOfFirst { it == action.oldValue }
+            val currentIndex = array.indexOfFirst { it == currentCurrency }
             array.getOrNull(currentIndex + 1) ?: array.first()
         }
 

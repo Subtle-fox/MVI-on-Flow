@@ -13,5 +13,8 @@
         <item
             android:id="@+id/nav_sample_3"
             android:title="Currency list" />
+        <item
+            android:id="@+id/nav_sample_4"
+            android:title="Race condition" />
     </group>
 </menu>
