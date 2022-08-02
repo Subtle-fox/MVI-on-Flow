@@ -21,6 +21,13 @@ Screen with countries list, pagination and navigation
 https://user-images.githubusercontent.com/5879172/182159683-c0233c1e-db4c-4c96-b524-5b7b5fccd92d.mov
 
 
+### Sample 4
+
+Sample of how sequence of dependant actions can be implemented: 
+
+https://user-images.githubusercontent.com/5879172/182425025-6c8f1994-b626-4d71-81fc-6d89f44416b2.mov
+
+
 
 ### Template 
 
