@@ -40,6 +40,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_sample_1,
                 R.id.nav_sample_2,
                 R.id.nav_sample_3,
+                R.id.nav_sample_4,
+                R.id.nav_sample_5,
             ),
             drawerLayout
         )

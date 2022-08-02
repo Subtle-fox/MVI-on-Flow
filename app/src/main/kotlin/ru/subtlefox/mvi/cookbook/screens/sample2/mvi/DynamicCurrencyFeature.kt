@@ -25,5 +25,5 @@ class DynamicCurrencyFeature @Inject constructor(
     actor = actor,
     eventProducer = DynamicCurrencyEventProducer,
     reducer = DynamicCurrencyReducer,
-    tagPostfix = "Sample[2]"
+    name = "Sample[2]"
 )

@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
-import ru.subtlefox.mvi.cookbook.screens.sample3.domain.CountriesApi
+import ru.subtlefox.mvi.cookbook.domain.CountriesApi
 import ru.subtlefox.mvi.cookbook.screens.sample3.mvi.entity.CountryListAction
 import ru.subtlefox.mvi.cookbook.screens.sample3.mvi.entity.CountryListEffect
 import ru.subtlefox.mvi.cookbook.screens.sample3.mvi.entity.CountryListState

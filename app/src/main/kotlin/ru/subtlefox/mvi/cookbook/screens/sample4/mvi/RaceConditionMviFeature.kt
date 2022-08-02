@@ -15,5 +15,5 @@ class RaceConditionFeature @Inject constructor(
     bootstrap = bootstrap,
     actor = actor,
     reducer = RaceConditionReducer,
-    tagPostfix = "RaceCondition"
+    name = "Sample[4]"
 )

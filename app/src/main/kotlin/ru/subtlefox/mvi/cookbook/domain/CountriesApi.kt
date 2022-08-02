@@ -1,4 +1,4 @@
-package ru.subtlefox.mvi.cookbook.screens.sample3.domain
+package ru.subtlefox.mvi.cookbook.domain
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -23,7 +23,7 @@ class CountriesApi @Inject constructor() {
         return withContext(Dispatchers.IO) {
             delay(2000)
 
-            if (page == errorPage ) {
+            if (page == errorPage) {
                 errorPage++
                 throw IOException("Simulated Error")
             }
@@ -37,6 +37,14 @@ class CountriesApi @Inject constructor() {
             val toIndex = ((page + 1) * count).coerceAtMost(locales.size)
 
             locales.subList(fromIndex, toIndex)
+        }
+    }
+
+    suspend fun getCountryList(filter: String): List<Locale> {
+        return getCountryList(0, 10000).filter { locale ->
+            with(locale) {
+                displayCountry.startsWith(filter, true) || displayLanguage.startsWith(filter, true)
+            }
         }
     }
 }

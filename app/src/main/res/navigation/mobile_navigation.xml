@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_sample_1">
+    app:startDestination="@+id/nav_sample_5">
 
     <fragment
         android:id="@+id/nav_sample_1"
@@ -29,5 +29,10 @@
         android:id="@+id/nav_sample_4"
         android:name="ru.subtlefox.mvi.cookbook.screens.sample4.RaceConditionFragment"
         tools:layout="@layout/fragment_sample_4" />
+
+    <fragment
+        android:id="@+id/nav_sample_5"
+        android:name="ru.subtlefox.mvi.cookbook.screens.sample5.SaveFilterFragment"
+        tools:layout="@layout/fragment_sample_5" />
 
 </navigation>
