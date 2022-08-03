@@ -38,6 +38,13 @@ Demonstrate how to you SavedStateHandle to restore whole screen state after Acti
 
 https://user-images.githubusercontent.com/5879172/182621141-7318ef64-ebe0-4df5-a7e2-7d5fa382c0d6.mov
 
+### Sample 7
+
+Demonstrates how 2 independent MviFeatures can be combined inside of single ViewModel (sample 2 and sample 5)
+Note, that in real world this example is much easier to implement using simple fragment stacking
+
+https://user-images.githubusercontent.com/5879172/182635509-513d7d67-f6ff-4bd2-8f79-3ce31d578b8d.mov
+
 
 
 ### Template 
