@@ -40,4 +40,9 @@
         android:name="ru.subtlefox.mvi.cookbook.screens.sample6.SaveStateFragment"
         tools:layout="@layout/fragment_sample_5" />
 
+    <fragment
+        android:id="@+id/nav_sample_7"
+        android:name="ru.subtlefox.mvi.cookbook.screens.sample7.CombinationFragment"
+        tools:layout="@layout/fragment_sample_7" />
+
 </navigation>
