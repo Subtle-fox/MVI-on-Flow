@@ -22,5 +22,8 @@
         <item
             android:id="@+id/nav_sample_6"
             android:title="Search: Save full state" />
+        <item
+            android:id="@+id/nav_sample_7"
+            android:title="Combine two MviFeatures" />
     </group>
 </menu>

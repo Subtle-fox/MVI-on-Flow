@@ -7,7 +7,7 @@ import ru.subtlefox.mvi.cookbook.screens.sample5.mvi.entity.SaveFilterState
 import ru.subtlefox.mvi.flow.MviFeature
 import javax.inject.Inject
 
-class SaveStateFeature @Inject constructor(
+class SaveFilterFeature @Inject constructor(
     bootstrap: SaveFilterBootstrap,
     actor: SaveFilterActor,
 ) : MviFeature<SaveFilterAction, SaveFilterEffect, SaveFilterState, Any>(

@@ -8,13 +8,13 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.launch
 import ru.subtlefox.mvi.cookbook.screens.sample5.data.FilterRepository
-import ru.subtlefox.mvi.cookbook.screens.sample5.mvi.SaveStateFeature
+import ru.subtlefox.mvi.cookbook.screens.sample5.mvi.SaveFilterFeature
 import ru.subtlefox.mvi.cookbook.screens.sample5.mvi.entity.SaveFilterAction
 import javax.inject.Inject
 
 @HiltViewModel
 class SaveFilterViewModel @Inject constructor(
-    private val feature: SaveStateFeature,
+    private val feature: SaveFilterFeature,
     private val saveStateHandle: SavedStateHandle,
     private val repository: FilterRepository
 ) : ViewModel() {
