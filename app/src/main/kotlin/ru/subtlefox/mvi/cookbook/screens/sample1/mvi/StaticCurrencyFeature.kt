@@ -18,5 +18,5 @@ class StaticCurrencyFeature @Inject constructor(
     initialState = StaticCurrencyState.Loading,
     bootstrap = currencyBootstrap,
     reducer = StaticCurrencyReducer,
-    tagPostfix = "Sample[1]"
+    name = "Sample[1]"
 )

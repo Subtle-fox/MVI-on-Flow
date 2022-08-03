@@ -40,7 +40,7 @@ class CountryListAdapter(
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(viewGroup.context)
         return when (viewType) {
-            VIEW_TYPE_CURRENCY -> CurrencyViewHolder(LayoutCountriesBinding.inflate(inflater, viewGroup, false))
+            VIEW_TYPE_CURRENCY -> ItemViewHolder(LayoutCountriesBinding.inflate(inflater, viewGroup, false))
             VIEW_TYPE_PROGRESS -> ProgressViewHolder(LayoutProgressBinding.inflate(inflater, viewGroup, false))
             VIEW_TYPE_ERROR -> ErrorViewHolder(LayoutErrorBinding.inflate(inflater, viewGroup, false))
             else -> throw IllegalArgumentException("Not supported: $viewType")
@@ -49,7 +49,7 @@ class CountryListAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (val item = getItem(position)) {
-            is CountryListState.CountryItem -> with((holder as CurrencyViewHolder).binding) {
+            is CountryListState.CountryItem -> with((holder as ItemViewHolder).binding) {
                 iso.text = item.iso
                 name.text = item.name
                 language.text = item.language
@@ -68,7 +68,7 @@ class CountryListAdapter(
     ////////////////
     // ViewHolders
 
-    class CurrencyViewHolder(val binding: LayoutCountriesBinding) : RecyclerView.ViewHolder(binding.root)
+    class ItemViewHolder(val binding: LayoutCountriesBinding) : RecyclerView.ViewHolder(binding.root)
 
     class ProgressViewHolder(binding: LayoutProgressBinding) : RecyclerView.ViewHolder(binding.root)
 
