@@ -1,4 +1,4 @@
-package ru.subtlefox.mvi.cookbook.screens.sample5
+package ru.subtlefox.mvi.cookbook.screens.sample6
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,12 +15,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import ru.subtlefox.mvi.cookbook.screens.sample5.mvi.entity.SaveFilterAction
-import ru.subtlefox.mvi.cookbook.screens.sample5.mvi.entity.SaveFilterState
+import ru.subtlefox.mvi.cookbook.screens.sample6.mvi.entity.SaveStateAction
+import ru.subtlefox.mvi.cookbook.screens.sample6.mvi.entity.SaveStateState
 import ru.subtlefox.mvi.cookbook.databinding.FragmentSample5Binding as Binding
 
 @AndroidEntryPoint
-class SaveFilterFragment : Fragment() {
-    private val viewModel: SaveFilterViewModel by viewModels()
+class SaveStateFragment : Fragment() {
+    private val viewModel: SaveStateViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val binding = Binding.inflate(inflater, container, false)
@@ -31,7 +32,7 @@ class SaveFilterFragment : Fragment() {
                 layoutManager = LinearLayoutManager(context)
             }
             searchEdit.addTextChangedListener {
-                viewModel.accept(SaveFilterAction.FilterChange(it?.toString().orEmpty()))
+                viewModel.accept(SaveStateAction.FilterChange(it?.toString().orEmpty()))
             }
         }
 
@@ -44,7 +45,7 @@ class SaveFilterFragment : Fragment() {
         return binding.root
     }
 
-    private fun render(state: SaveFilterState, binding: Binding, listAdapter: ListAdapter) {
+    private fun render(state: SaveStateState, binding: Binding, listAdapter: ListAdapter) {
         listAdapter.submitList(state.items)
 
         with(binding) {

@@ -37,14 +37,26 @@ import ru.subtlefox.mvi.flow.utils.logValue
  * @param name to distinguish different features in logs
  *
  */
-open class MviFeature<Action : Any, Effect : Any, State : Any, Event : Any>(
+open class MviFeature<Action : Any, Effect : Any, State : Any, Event : Any> constructor(
     private val initialState: State,
     private val bootstrap: MviBootstrap<Effect> = MviBootstrap { emptyFlow() },
     private val actor: MviActor<Action, Effect, State> = MviActor { _, _ -> emptyFlow() },
     private val eventProducer: MviEventProducer<Effect, Event> = MviEventProducer { null },
-    private val reducer: MviReducer<Effect, State>,
+    private val reducer: MviReducer<Effect, State> = MviReducer { _, state -> state },
     private val name: String = "",
 ) : AbstractFlow<State>(), FlowCollector<Action> {
+
+    open class Factory<Action : Any, Effect : Any, State : Any, Event : Any>(
+        private val bootstrap: MviBootstrap<Effect> = MviBootstrap { emptyFlow() },
+        private val actor: MviActor<Action, Effect, State> = MviActor { _, _ -> emptyFlow() },
+        private val eventProducer: MviEventProducer<Effect, Event> = MviEventProducer { null },
+        private val reducer: MviReducer<Effect, State>,
+        private val name: String = "",
+    ) {
+        fun create(initialState: State): MviFeature<Action, Effect, State, Event> {
+            return MviFeature(initialState, bootstrap, actor, eventProducer, reducer, name)
+        }
+    }
 
     companion object {
         private const val TAG_PREFIX = "Mvi-"
@@ -52,7 +64,7 @@ open class MviFeature<Action : Any, Effect : Any, State : Any, Event : Any>(
         private const val EVENTS_BUFFER_SIZE = 20
     }
 
-    private val tag = "$TAG_PREFIX$tagPostfix"
+    private val tag = "$TAG_PREFIX$name"
     private val actionsFlow = MutableSharedFlow<Action>(replay = 0, ACTIONS_BUFFER_SIZE, BufferOverflow.SUSPEND)
     private val eventsFlow = MutableSharedFlow<Event>(replay = 0, EVENTS_BUFFER_SIZE, BufferOverflow.SUSPEND)
     val events: Flow<Event> = eventsFlow.asSharedFlow()
@@ -68,10 +80,9 @@ open class MviFeature<Action : Any, Effect : Any, State : Any, Event : Any>(
             .produceEvent()
             .distinctUntilChanged()
             .reduceEffect()
-            .onStart { emit(state) }
+            .onStart { emit(initialState) }
             .distinctUntilChanged()
             .logMviFeature(tag)
-
 
     /**
      * Always emits State values within collector's coroutine scope

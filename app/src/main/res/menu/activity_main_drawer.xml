@@ -18,6 +18,9 @@
             android:title="Race condition" />
         <item
             android:id="@+id/nav_sample_5"
-            android:title="Search filter" />
+            android:title="Search: Save filter" />
+        <item
+            android:id="@+id/nav_sample_6"
+            android:title="Search: Save full state" />
     </group>
 </menu>

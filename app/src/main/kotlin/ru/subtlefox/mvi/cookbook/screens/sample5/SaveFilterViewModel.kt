@@ -4,12 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.debounce
-import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.launch
 import ru.subtlefox.mvi.cookbook.screens.sample5.data.FilterRepository
@@ -28,29 +23,18 @@ class SaveFilterViewModel @Inject constructor(
         private const val BUNDLE_SEARCH_KEY = "search"
     }
 
-    private val actionsFlow = MutableSharedFlow<SaveFilterAction>()
     private val sharedState by lazy { feature.shareIn(viewModelScope, SharingStarted.Lazily, 1) }
 
     init {
         println("Mvi-ViewModel created: ${hashCode()}")
 
         repository.setFilter(saveStateHandle.get<String>(BUNDLE_SEARCH_KEY).orEmpty())
-
-        viewModelScope.launch {
-            actionsFlow
-                .processActions()
-                .collect(feature)
-        }
     }
 
-    private fun Flow<SaveFilterAction>.processActions(): Flow<SaveFilterAction> {
-        return this
-            .debounce(1_000)
-            .distinctUntilChanged()
-            .onEach { if (it is SaveFilterAction.FilterChange) saveStateHandle[BUNDLE_SEARCH_KEY] = it.filter }
+    fun accept(action: SaveFilterAction) = viewModelScope.launch {
+        if (action is SaveFilterAction.FilterChange) saveStateHandle[BUNDLE_SEARCH_KEY] = action.filter
+        feature.accept(action)
     }
-
-    fun accept(action: SaveFilterAction) = viewModelScope.launch { actionsFlow.emit(action) }
 
     fun collectState() = sharedState
 }
