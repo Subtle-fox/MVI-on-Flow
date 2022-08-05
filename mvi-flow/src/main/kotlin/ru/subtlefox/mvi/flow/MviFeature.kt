@@ -106,7 +106,11 @@ open class MviFeature<Action : Any, Effect : Any, State : Any, Event : Any> cons
     }
 
     private fun observeActions(): Flow<Effect> {
-        return actionsFlow
+        return with(actor) {
+            actionsFlow
+//                .onEach { it.logValue(tag, "pre-action") }
+                .process()
+        }
             .flatMapMerge { action ->
                 action.logValue(tag, "action")
                 // TODO: not sure about `state` here. If needed - then should be a proper synchronization

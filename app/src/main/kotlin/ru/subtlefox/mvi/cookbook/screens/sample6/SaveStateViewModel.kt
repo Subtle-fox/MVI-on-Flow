@@ -6,8 +6,6 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.debounce
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.launch
@@ -43,13 +41,21 @@ class SaveStateViewModel @Inject constructor(
 
         viewModelScope.launch {
             actionsFlow
-                .debounce(1_000)
-                .distinctUntilChanged()
+//                .debounce(1_000)
+//                .distinctUntilChanged()
                 .collect(feature)
         }
     }
 
-    fun accept(action: SaveStateAction) = viewModelScope.launch { actionsFlow.emit(action) }
+    fun accept(action: SaveStateAction) {
+        viewModelScope.launch {
+            actionsFlow.emit(action)
+        }
+
+        viewModelScope.launch {
+            actionsFlow.emit(SaveStateAction.Stub)
+        }
+    }
 
     fun collectState() = sharedState
 }

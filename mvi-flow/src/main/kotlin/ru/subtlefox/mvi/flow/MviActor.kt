@@ -1,6 +1,7 @@
 package ru.subtlefox.mvi.flow
 
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emptyFlow
 
 /**
  * Actor executes business logic to produce stream of Effects in response to incoming Action.
@@ -28,4 +29,6 @@ import kotlinx.coroutines.flow.Flow
  */
 fun interface MviActor<Action : Any, Effect : Any, State : Any> : (Action, State) -> Flow<Effect> {
     override fun invoke(action: Action, previousState: State): Flow<Effect>
+
+    open fun Flow<Action>.process(): Flow<Action>  = this
 }
