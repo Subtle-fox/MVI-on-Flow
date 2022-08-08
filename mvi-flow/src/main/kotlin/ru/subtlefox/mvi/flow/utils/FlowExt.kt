@@ -12,12 +12,12 @@ fun <K, V> Flow<V>.groupBy(keyFunc: (V) -> K) = flow {
     val storage = mutableMapOf<K, SendChannel<V>>()
     try {
         collect { action ->
-            val channel = storage.getOrPut(keyFunc(action)) {
+            val groupChannel = storage.getOrPut(keyFunc(action)) {
                 Channel<V>(CHANNEL_CAPACITY).also {
                     emit(keyFunc(action) to it.consumeAsFlow())
                 }
             }
-            channel.send(action)
+            groupChannel.send(action)
         }
     } finally {
         storage.values.forEach { chain -> chain.close() }

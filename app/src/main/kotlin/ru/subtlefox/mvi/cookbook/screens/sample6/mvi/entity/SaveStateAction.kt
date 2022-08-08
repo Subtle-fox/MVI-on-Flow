@@ -7,9 +7,4 @@ sealed class SaveStateAction {
         val filter: String
     ) : SaveStateAction()
 
-    object Stub: SaveStateAction() {
-        override fun toString(): String {
-            return "Stub"
-        }
-    }
 }

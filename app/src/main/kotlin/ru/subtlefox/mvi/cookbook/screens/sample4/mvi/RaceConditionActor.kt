@@ -62,7 +62,7 @@ class RaceConditionActor @Inject constructor(
         const val RACE_GROUP_ID = 100
     }
 
-    override fun transformByAction(
+    override fun transformByGroup(
         actionGroup: Int,
         previousState: RaceConditionState
     ): Flow<RaceConditionAction>.() -> Flow<RaceConditionEffect> = {

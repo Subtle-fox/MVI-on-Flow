@@ -54,7 +54,7 @@ class SaveStateActor @Inject constructor(
         }
     }
 
-    override fun transformByAction(
+    override fun transformByGroup(
         actionGroup: Int,
         previousState: SaveStateState
     ): Flow<SaveStateAction>.() -> Flow<SaveStateEffect> = {

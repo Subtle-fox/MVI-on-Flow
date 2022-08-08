@@ -48,10 +48,6 @@ class SaveStateViewModel @Inject constructor(
         viewModelScope.launch {
             actionsFlow.emit(action)
         }
-
-        viewModelScope.launch {
-            actionsFlow.emit(SaveStateAction.Stub)
-        }
     }
 
     fun collectState() = sharedState
