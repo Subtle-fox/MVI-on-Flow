@@ -40,10 +40,7 @@ class SaveStateViewModel @Inject constructor(
         println("Mvi-ViewModel created: ${hashCode()}")
 
         viewModelScope.launch {
-            actionsFlow
-//                .debounce(1_000)
-//                .distinctUntilChanged()
-                .collect(feature)
+            actionsFlow.collect(feature)
         }
     }
 

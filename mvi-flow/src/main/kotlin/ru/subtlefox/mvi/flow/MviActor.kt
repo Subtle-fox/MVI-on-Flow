@@ -30,5 +30,6 @@ import kotlinx.coroutines.flow.emptyFlow
 fun interface MviActor<Action : Any, Effect : Any, State : Any> : (Action, State) -> Flow<Effect> {
     override fun invoke(action: Action, previousState: State): Flow<Effect>
 
-    open fun Flow<Action>.process(): Flow<Action>  = this
+    fun Flow<Action>.process(): Flow<Action> = this
+    fun Flow<Action>.process(previousState: State): Flow<Effect> = emptyFlow()
 }

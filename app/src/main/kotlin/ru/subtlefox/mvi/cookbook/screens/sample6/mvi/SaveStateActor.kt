@@ -12,14 +12,12 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.switchMap
 import ru.subtlefox.mvi.cookbook.domain.CountriesApi
 import ru.subtlefox.mvi.cookbook.screens.sample6.mvi.entity.SaveStateAction
 import ru.subtlefox.mvi.cookbook.screens.sample6.mvi.entity.SaveStateEffect
 import ru.subtlefox.mvi.cookbook.screens.sample6.mvi.entity.SaveStateState
 import ru.subtlefox.mvi.flow.BaseMviActor
 import javax.inject.Inject
-import kotlin.reflect.KClass
 
 class SaveStateActor @Inject constructor(
     private val api: CountriesApi
@@ -39,6 +37,7 @@ class SaveStateActor @Inject constructor(
     private fun performFiltration(filter: String) = flow {
         emit(SaveStateEffect.FilterChange(filter))
 
+        kotlinx.coroutines.delay(1000)
         val result = api.getCountryList(filter)
 
         emit(SaveStateEffect.FilterResult(filter, result))
@@ -47,17 +46,35 @@ class SaveStateActor @Inject constructor(
     override fun transformByAction(actionType: Int): Flow<SaveStateAction>.() -> Flow<SaveStateAction> {
         return {
             when (actionType) {
-                0 -> debounce(1000).onEach { "Mvi-Sample[6] ==> debounce" }
+                0 -> debounce(500).distinctUntilChanged().flatMapLatest { flowOf(it) }
                 1 -> this
-                else -> this //flatMapLatest { flowOf(it) }
+                else -> this
             }
         }
     }
 
     override fun getActionType(action: SaveStateAction): Int {
-        return  when(action) {
+        return when (action) {
             is SaveStateAction.FilterChange -> 0
-            is SaveStateAction.Stub -> 1
+            else -> 1
+        }
+    }
+
+    override fun transformByAction(
+        actionType: Int,
+        previousState: SaveStateState
+    ): Flow<SaveStateAction>.() -> Flow<SaveStateEffect> {
+        return {
+            when (actionType) {
+                0 -> debounce(1000)
+                    .onEach { println("Mvi- after debounce: $it") }
+                    .distinctUntilChanged()
+                    .flatMapLatest { invoke(it, previousState) }
+                    .onEach { println("Mvi- after swithcMap: $it") }
+
+                1 -> flatMapMerge { invoke(it, previousState) }
+                else -> flatMapLatest { invoke(it, previousState) }
+            }
         }
     }
 }

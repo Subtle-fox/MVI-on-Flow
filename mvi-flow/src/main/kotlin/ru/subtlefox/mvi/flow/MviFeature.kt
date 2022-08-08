@@ -108,16 +108,18 @@ open class MviFeature<Action : Any, Effect : Any, State : Any, Event : Any> cons
     private fun observeActions(): Flow<Effect> {
         return with(actor) {
             actionsFlow
-//                .onEach { it.logValue(tag, "pre-action") }
-                .process()
+//                .process()
+                .process(state)
+                .onEach { effect -> effect.logValue(tag, "actor") }
+
         }
-            .flatMapMerge { action ->
-                action.logValue(tag, "action")
-                // TODO: not sure about `state` here. If needed - then should be a proper synchronization
-                actor
-                    .invoke(action, state)
-                    .onEach { effect -> effect.logValue(tag, "actor") }
-            }
+//            .flatMapMerge { action ->
+//                action.logValue(tag, "action")
+//                 TODO: not sure about `state` here. If needed - then should be a proper synchronization
+//                actor
+//                    .invoke(action, state)
+//                    .onEach { effect -> effect.logValue(tag, "actor") }
+//            }
     }
 
     private fun Flow<Effect>.produceEvent(): Flow<Effect> = onEach { effect ->
