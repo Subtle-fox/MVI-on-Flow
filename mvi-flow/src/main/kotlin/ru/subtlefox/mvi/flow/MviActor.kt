@@ -1,7 +1,7 @@
 package ru.subtlefox.mvi.flow
 
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.emptyFlow
+import kotlinx.coroutines.flow.flatMapMerge
 
 /**
  * Actor executes business logic to produce stream of Effects in response to incoming Action.
@@ -30,6 +30,6 @@ import kotlinx.coroutines.flow.emptyFlow
 fun interface MviActor<Action : Any, Effect : Any, State : Any> : (Action, State) -> Flow<Effect> {
     override fun invoke(action: Action, previousState: State): Flow<Effect>
 
-    fun Flow<Action>.process(): Flow<Action> = this
-    fun Flow<Action>.process(previousState: State): Flow<Effect> = emptyFlow()
+    fun Flow<Action>.process(previousState: State): Flow<Effect> =
+        flatMapMerge { action -> invoke(action, previousState) }
 }

@@ -8,7 +8,6 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.emptyFlow
-import kotlinx.coroutines.flow.flatMapMerge
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.flow.onEach
@@ -106,20 +105,14 @@ open class MviFeature<Action : Any, Effect : Any, State : Any, Event : Any> cons
     }
 
     private fun observeActions(): Flow<Effect> {
+        // TODO: add proper synchronization for `state`
         return with(actor) {
             actionsFlow
-//                .process()
+                .onEach { action -> action.logValue(tag, "action") }
                 .process(state)
                 .onEach { effect -> effect.logValue(tag, "actor") }
 
         }
-//            .flatMapMerge { action ->
-//                action.logValue(tag, "action")
-//                 TODO: not sure about `state` here. If needed - then should be a proper synchronization
-//                actor
-//                    .invoke(action, state)
-//                    .onEach { effect -> effect.logValue(tag, "actor") }
-//            }
     }
 
     private fun Flow<Effect>.produceEvent(): Flow<Effect> = onEach { effect ->
