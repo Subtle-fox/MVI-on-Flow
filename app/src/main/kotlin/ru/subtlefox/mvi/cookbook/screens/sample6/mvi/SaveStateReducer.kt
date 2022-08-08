@@ -12,21 +12,17 @@ object SaveStateReducer : MviReducer<SaveStateEffect, SaveStateState> {
     ): SaveStateState = when (effect) {
 
         is SaveStateEffect.FilterResult -> {
-            if (previousState.filter != effect.filter) {
-                // stale request, just ignore
-                previousState
-            } else {
-                previousState.copy(
-                    items = effect.locales.map {
-                        SaveStateState.CountryItem(
-                            iso = it.country,
-                            name = it.displayCountry,
-                            language = it.displayLanguage
-                        )
-                    },
-                    inProgress = false
-                )
-            }
+            previousState.copy(
+                items = effect.locales.map {
+                    SaveStateState.CountryItem(
+                        iso = it.country,
+                        name = it.displayCountry,
+                        language = it.displayLanguage
+                    )
+                },
+                filter = effect.filter,
+                inProgress = false
+            )
         }
 
         is SaveStateEffect.FilterChange -> {
