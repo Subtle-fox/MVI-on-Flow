@@ -50,15 +50,15 @@ class SaveStateActor @Inject constructor(
     override fun getGroup(action: SaveStateAction): Int {
         return when (action) {
             is SaveStateAction.FilterChange -> FILTER_GROUP_ID
-            else -> super.getGroup(action)
+            else -> NO_OP_GROUP
         }
     }
 
     override fun transformByAction(
-        actionType: Int,
+        actionGroup: Int,
         previousState: SaveStateState
     ): Flow<SaveStateAction>.() -> Flow<SaveStateEffect> = {
-        when (actionType) {
+        when (actionGroup) {
             FILTER_GROUP_ID ->
                 this.debounce(1000)
                     .distinctUntilChanged()

@@ -11,12 +11,18 @@ abstract class GroupMviActor<Action : Any, Effect : Any, State : Any> : MviActor
 
     override fun Flow<Action>.process(previousState: State): Flow<Effect> {
         return groupBy(::getGroup)
-            .flatMapMerge { (actionType, groupFlow) ->
-                groupFlow.run(transformByAction(actionType, previousState))
+            .flatMapMerge { (actionGroup, groupFlow) ->
+                groupFlow.run(transformByAction(actionGroup, previousState))
             }
     }
 
-    abstract fun transformByAction(actionType: Int, previousState: State): Flow<Action>.() -> Flow<Effect>
 
-    open fun getGroup(action: Action): Int = NO_OP_GROUP
+    abstract fun transformByAction(actionGroup: Int, previousState: State): Flow<Action>.() -> Flow<Effect>
+
+    abstract fun getGroup(action: Action): Int
+
+    interface ActionGroup<Action, State> {
+        fun getId(action: Action): Int
+        fun getTransformation(actionType: Int, previousState: State)
+    }
 }

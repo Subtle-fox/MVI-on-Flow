@@ -3,24 +3,23 @@ package ru.subtlefox.mvi.cookbook.screens.sample4.mvi
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flatMapConcat
+import kotlinx.coroutines.flow.flatMapMerge
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.sync.Mutex
-import kotlinx.coroutines.sync.withLock
 import ru.subtlefox.mvi.cookbook.screens.sample4.data.LikesRemoteRepository
 import ru.subtlefox.mvi.cookbook.screens.sample4.mvi.entity.RaceConditionAction
 import ru.subtlefox.mvi.cookbook.screens.sample4.mvi.entity.RaceConditionEffect
 import ru.subtlefox.mvi.cookbook.screens.sample4.mvi.entity.RaceConditionState
-import ru.subtlefox.mvi.flow.MviActor
+import ru.subtlefox.mvi.flow.GroupMviActor
 import javax.inject.Inject
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
 class RaceConditionActor @Inject constructor(
     private val likesRepository: LikesRemoteRepository
-) : MviActor<RaceConditionAction, RaceConditionEffect, RaceConditionState> {
+) : GroupMviActor<RaceConditionAction, RaceConditionEffect, RaceConditionState>() {
 
-    private val guard = MutexGuardian()
     private val ioDispatcher = Dispatchers.IO
 
     override fun invoke(
@@ -30,10 +29,10 @@ class RaceConditionActor @Inject constructor(
 
         return when (action) {
             is RaceConditionAction.Like ->
-                guard.like()
+                like()
 
             is RaceConditionAction.Unlike ->
-                guard.unlike()
+                unlike()
 
             is RaceConditionAction.Share -> flow {
                 emit(RaceConditionEffect.DisplayShare(null))
@@ -43,27 +42,40 @@ class RaceConditionActor @Inject constructor(
         }
     }
 
-    private inner class MutexGuardian {
-        fun like() = callAsync(100)
-        fun unlike() = callAsync(-100)
+    private fun like() = callAsync(100)
 
-        /*
-            Ensure that this flow will executes sequentially in "atomic" way (sequence "start -> operation -> result")
+    private fun unlike() = callAsync(-100)
 
-            flatMap's implementation transforms actions sequentially
-         */
-        private val mutex = Mutex()
-
-        private fun callAsync(delta: Int) = flow {
-            mutex.withLock {
-                emit(RaceConditionEffect.Loading())
-                val result = suspendCoroutine { continuation ->
-                    likesRepository.changeLikesAsync(delta) { asyncResult ->
-                        continuation.resume(asyncResult)
-                    }
-                }
-                emit(RaceConditionEffect.Data(result))
+    private fun callAsync(delta: Int) = flow {
+        emit(RaceConditionEffect.Loading())
+        val result = suspendCoroutine { continuation ->
+            likesRepository.changeLikesAsync(delta) { asyncResult ->
+                continuation.resume(asyncResult)
             }
-        }.flowOn(ioDispatcher)
+        }
+        emit(RaceConditionEffect.Data(result))
+    }.flowOn(ioDispatcher)
+
+    ///////
+
+    companion object {
+        const val RACE_GROUP_ID = 100
+    }
+
+    override fun transformByAction(
+        actionGroup: Int,
+        previousState: RaceConditionState
+    ): Flow<RaceConditionAction>.() -> Flow<RaceConditionEffect> = {
+        when (actionGroup) {
+            RACE_GROUP_ID -> this.flatMapConcat { invoke(it, previousState) }
+            else -> this.flatMapMerge { invoke(it, previousState) }
+        }
+    }
+
+    override fun getGroup(action: RaceConditionAction): Int {
+        return when (action) {
+            is RaceConditionAction.Like, is RaceConditionAction.Unlike -> RACE_GROUP_ID
+            else -> NO_OP_GROUP
+        }
     }
 }
