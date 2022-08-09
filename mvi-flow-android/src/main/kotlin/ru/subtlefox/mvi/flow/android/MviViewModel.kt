@@ -16,7 +16,7 @@ abstract class MviViewModel<Action : Any, State : Any, Event : Any>(
         feature.shareIn(viewModelScope, SharingStarted.Lazily, 1)
     }
 
-    fun accept(action: Action) {
+    open fun accept(action: Action) {
         viewModelScope.launch {
             feature.emit(action)
         }

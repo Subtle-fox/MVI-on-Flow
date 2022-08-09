@@ -3,6 +3,10 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+android {
+    compileSdk 32
+}
+
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
@@ -10,7 +14,6 @@ java {
 
 
 dependencies {
-    api project(":mvi-flow")
-
+    implementation project(":mvi-flow")
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0'
 }

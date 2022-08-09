@@ -37,6 +37,7 @@ android {
 
 dependencies {
     implementation project(":mvi-flow")
+    implementation project(":mvi-flow-android")
 
     implementation 'com.google.dagger:hilt-android:2.43'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.0'

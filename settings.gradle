@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 rootProject.name = "MviFlow"
 include ':app'
 include ':mvi-flow'
+include ':mvi-flow-android'

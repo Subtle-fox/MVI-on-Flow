@@ -37,7 +37,7 @@ class SaveFilterFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.collectState().collect { state -> render(state, binding, listAdapter) }
+                viewModel.collectState { state -> render(state, binding, listAdapter) }
             }
         }
 
