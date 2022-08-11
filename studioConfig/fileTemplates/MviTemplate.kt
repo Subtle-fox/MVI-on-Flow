@@ -21,5 +21,5 @@ class ${NAME}Feature @Inject constructor(
     actor = actor,
     eventProducer = ${NAME}EventProducer,
     reducer = ${NAME}Reducer,
-    tagPostfix = "${NAME}"
+    name = "${NAME}"
 )

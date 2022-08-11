@@ -45,18 +45,6 @@ open class MviFeature<Action : Any, Effect : Any, State : Any, Event : Any> cons
     private val name: String = "",
 ) : AbstractFlow<State>(), FlowCollector<Action> {
 
-    open class Factory<Action : Any, Effect : Any, State : Any, Event : Any>(
-        private val bootstrap: MviBootstrap<Effect> = MviBootstrap { emptyFlow() },
-        private val actor: MviActor<Action, Effect, State> = MviActor { _, _ -> emptyFlow() },
-        private val eventProducer: MviEventProducer<Effect, Event> = MviEventProducer { null },
-        private val reducer: MviReducer<Effect, State>,
-        private val name: String = "",
-    ) {
-        fun create(initialState: State): MviFeature<Action, Effect, State, Event> {
-            return MviFeature(initialState, bootstrap, actor, eventProducer, reducer, name)
-        }
-    }
-
     companion object {
         private const val TAG_PREFIX = "Mvi-"
         private const val ACTIONS_BUFFER_SIZE = 5
