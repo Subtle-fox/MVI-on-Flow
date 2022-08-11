@@ -29,4 +29,10 @@ import kotlinx.coroutines.flow.Flow
  *   }
  * ```
  */
-fun interface MviBootstrap<Effect : Any> : () -> Flow<Effect>
+fun interface MviBootstrap<Effect : Any> : () -> Flow<Effect> {
+
+    fun interface Factory<Effect : Any> {
+        fun create(isRestored: Boolean): MviBootstrap<Effect>
+    }
+
+}
