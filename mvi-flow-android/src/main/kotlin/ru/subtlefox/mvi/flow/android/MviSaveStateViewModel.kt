@@ -9,7 +9,6 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import ru.subtlefox.mvi.flow.MviFeature
 import ru.subtlefox.mvi.flow.MviFeatureFactory
 
 abstract class MviSaveStateViewModel<Action : Any, State : Parcelable, Event : Any>(
@@ -23,6 +22,10 @@ abstract class MviSaveStateViewModel<Action : Any, State : Parcelable, Event : A
 
     private val savedStateKey = featureFactory.name + KEY_STATE
 
+    open fun getInitialActions(isRestored: Boolean): List<Action> {
+        return emptyList()
+    }
+
     open fun restoreState(savedStateHandle: SavedStateHandle): State? {
         return savedStateHandle.get<State>(savedStateKey)
     }
@@ -32,7 +35,9 @@ abstract class MviSaveStateViewModel<Action : Any, State : Parcelable, Event : A
     }
 
     private val feature by lazy {
-        featureFactory.create(restoreState(savedStateHandle))
+        restoreState(savedStateHandle).let { state ->
+            featureFactory.create(state, getInitialActions(isRestored = state != null))
+        }
     }
 
     val stateFlow by lazy {

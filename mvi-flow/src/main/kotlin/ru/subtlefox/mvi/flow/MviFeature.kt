@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.onSubscription
 import ru.subtlefox.mvi.flow.utils.logMviFeature
 import ru.subtlefox.mvi.flow.utils.logValue
 
@@ -38,6 +39,7 @@ import ru.subtlefox.mvi.flow.utils.logValue
  */
 open class MviFeature<Action : Any, Effect : Any, State : Any, Event : Any> constructor(
     private val initialState: State,
+    private val initialActions: List<Action> = emptyList(),
     private val bootstrap: MviBootstrap<Effect> = MviBootstrap { emptyFlow() },
     private val actor: MviActor<Action, Effect, State> = MviActor { _, _ -> emptyFlow() },
     private val eventProducer: MviEventProducer<Effect, Event> = MviEventProducer { null },
@@ -96,6 +98,7 @@ open class MviFeature<Action : Any, Effect : Any, State : Any, Event : Any> cons
         // TODO: add proper synchronization for `state`
         return with(actor) {
             actionsFlow
+                .onSubscription { initialActions.forEach { emit(it) } }
                 .onEach { action -> action.logValue(tag, "action") }
                 .process(state)
                 .onEach { effect -> effect.logValue(tag, "actor") }

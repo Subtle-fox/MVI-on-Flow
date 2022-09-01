@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.emptyFlow
 
 open class MviFeatureFactory<Action : Any, Effect : Any, State : Any, Event : Any>(
     private val defaultInitialState: State,
-    private val bootstrapFactory: MviBootstrap.Factory<Effect> = MviBootstrap.Factory { MviBootstrap { emptyFlow() } },
+    private val bootstrapFactory: MviBootstrap.Factory<Effect>,
     private val actor: MviActor<Action, Effect, State> = MviActor { _, _ -> emptyFlow() },
     private val eventProducer: MviEventProducer<Effect, Event> = MviEventProducer { null },
     private val reducer: MviReducer<Effect, State>,
@@ -21,14 +21,56 @@ open class MviFeatureFactory<Action : Any, Effect : Any, State : Any, Event : An
         eventProducer: MviEventProducer<Effect, Event> = MviEventProducer { null },
         reducer: MviReducer<Effect, State>,
         name: String,
-    ) : this(defaultInitialState, MviBootstrap.Factory { bootstrap }, actor, eventProducer, reducer, name)
-
-    fun create(initialState: State?): MviFeature<Action, Effect, State, Event> = MviFeature(
-        initialState = initialState ?: defaultInitialState,
-        bootstrap = bootstrapFactory.create(isRestored = initialState != null),
-        actor = actor,
-        eventProducer = eventProducer,
-        reducer = reducer,
-        name = name,
+    ) : this(
+        defaultInitialState,
+        MviBootstrap.Factory { bootstrap },
+        actor,
+        eventProducer,
+        reducer,
+        name
     )
+
+    constructor(
+        defaultInitialState: State,
+        actor: MviActor<Action, Effect, State>,
+        eventProducer: MviEventProducer<Effect, Event> = MviEventProducer { null },
+        reducer: MviReducer<Effect, State>,
+        name: String,
+    ) : this(
+        defaultInitialState,
+        MviBootstrap { emptyFlow() },
+        actor,
+        eventProducer,
+        reducer,
+        name
+    )
+
+    /**
+     * TODO: contract: initial actions should be empty when bootstrap / bootstrap factory is set
+     */
+    fun create(initialState: State?): MviFeature<Action, Effect, State, Event> =
+        MviFeature(
+            initialState = initialState ?: defaultInitialState,
+            initialActions = emptyList(),
+            bootstrap = bootstrapFactory.create(isRestored = initialState != null),
+            actor = actor,
+            eventProducer = eventProducer,
+            reducer = reducer,
+            name = name,
+        )
+
+    /**
+     * TODO:
+     * contract: bootstrap shouldn't be set with initial actions
+     */
+    fun create(initialState: State?, initialActions: List<Action>): MviFeature<Action, Effect, State, Event> =
+        MviFeature(
+            initialState = initialState ?: defaultInitialState,
+            initialActions = initialActions,
+            bootstrap = { emptyFlow() },
+            actor = actor,
+            eventProducer = eventProducer,
+            reducer = reducer,
+            name = name
+        )
 }
