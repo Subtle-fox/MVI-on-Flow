@@ -6,6 +6,15 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import java.util.concurrent.CancellationException
 
+interface Logger {
+    fun i(tag: String, message: String, e: Throwable? = null)
+
+    fun d(tag: String, message: String, e: Throwable? = null)
+
+    fun e(tag: String, message: String, e: Throwable? = null)
+
+    fun v(tag: String, message: String, e: Throwable? = null)
+}
 
 internal fun <T : Any> Flow<T>.logMviFeature(tag: String): Flow<T> = this
     .onStart {
