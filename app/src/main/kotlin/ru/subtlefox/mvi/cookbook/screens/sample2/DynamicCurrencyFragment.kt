@@ -52,16 +52,15 @@ class DynamicCurrencyFragment : Fragment() {
     ): View {
         binding = Binding.inflate(inflater, container, false)
 
-
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            viewModel.collectState().collect {
+            viewModel.collectState {
                 // Render new state and delegate actions to ViewModel
                 render(it, binding, viewModel::accept)
             }
         }
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            viewModel.collectEvents().collect {
+            viewModel.collectEvents {
                 handleEvent(it)
             }
         }

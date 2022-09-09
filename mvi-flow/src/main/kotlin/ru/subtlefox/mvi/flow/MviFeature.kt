@@ -45,27 +45,16 @@ open class MviFeature<Action : Any, Effect : Any, State : Any, Event : Any> cons
     private val name: String = "",
 ) : AbstractFlow<State>(), FlowCollector<Action> {
 
-    open class Factory<Action : Any, Effect : Any, State : Any, Event : Any>(
-        private val bootstrap: MviBootstrap<Effect> = MviBootstrap { emptyFlow() },
-        private val actor: MviActor<Action, Effect, State> = MviActor { _, _ -> emptyFlow() },
-        private val eventProducer: MviEventProducer<Effect, Event> = MviEventProducer { null },
-        private val reducer: MviReducer<Effect, State>,
-        private val name: String = "",
-    ) {
-        fun create(initialState: State): MviFeature<Action, Effect, State, Event> {
-            return MviFeature(initialState, bootstrap, actor, eventProducer, reducer, name)
-        }
-    }
-
     companion object {
         private const val TAG_PREFIX = "Mvi-"
-        private const val ACTIONS_BUFFER_SIZE = 5
-        private const val EVENTS_BUFFER_SIZE = 20
+        private const val ACTIONS_REPLAYS = 8
+        private const val ACTIONS_BUFFER = 16
+        private const val EVENTS_BUFFER = 16
     }
 
     private val tag = "$TAG_PREFIX$name"
-    private val actionsFlow = MutableSharedFlow<Action>(replay = 0, ACTIONS_BUFFER_SIZE, BufferOverflow.SUSPEND)
-    private val eventsFlow = MutableSharedFlow<Event>(replay = 0, EVENTS_BUFFER_SIZE, BufferOverflow.SUSPEND)
+    private val actionsFlow = MutableSharedFlow<Action>(ACTIONS_REPLAYS, ACTIONS_BUFFER, BufferOverflow.SUSPEND)
+    private val eventsFlow = MutableSharedFlow<Event>(replay = 0, EVENTS_BUFFER, BufferOverflow.SUSPEND)
     val events: Flow<Event> = eventsFlow.asSharedFlow()
 
     var state = initialState

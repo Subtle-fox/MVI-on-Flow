@@ -47,7 +47,7 @@ class CountryListFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.collectState().collect { state ->
+                viewModel.collectState { state ->
                     binding.list.clearOnScrollListeners()
 
                     listAdapter.submitList(state.items)
@@ -62,7 +62,7 @@ class CountryListFragment : Fragment() {
         }
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            viewModel.collectEvents().collect(::handleEvent)
+            viewModel.collectEvents(::handleEvent)
         }
 
         return binding.root
