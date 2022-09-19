@@ -1,4 +1,26 @@
-## Implementation of MVI pattern based on coroutines flow
+## Implementation of MVI pattern based on Flow
+
+The basic entity is called `Feature` which has an input `action` and output `state` and can emit `event`
+
+<img width="250" alt="Снимок экрана 2022-09-19 в 19 54 29" src="https://user-images.githubusercontent.com/5879172/191072332-d9630928-4d30-4ce0-9895-27493ab5a650.png">
+
+Feature extends Flow and implements FlowCollector. 
+
+<img width="250" alt="Снимок экрана 2022-09-19 в 19 54 39" src="https://user-images.githubusercontent.com/5879172/191072428-dac22741-037d-48df-baba-3f8cfcc52b51.png">
+
+Thus, it is possible to combine them as regular Kotlin's Flows:
+
+<img width="555" alt="Снимок экрана 2022-09-19 в 19 56 25" src="https://user-images.githubusercontent.com/5879172/191072508-fd3e4fc7-4a02-453f-8c58-b35a1d28b24d.png">
+<img width="600" alt="Снимок экрана 2022-09-19 в 19 54 57" src="https://user-images.githubusercontent.com/5879172/191072515-ea897080-177a-4315-ac7c-e700626bb311.png">
+
+This picture shows how data flows inside of the Feature 
+
+<img width="700" alt="Снимок экрана 2022-09-19 в 19 57 14" src="https://user-images.githubusercontent.com/5879172/191072590-91a4ee7d-c9c3-4cbe-96c7-58788ba3e369.png">
+
+There is no obligation to use each component. We can emit either Actor, Bootstrap or EventProducer or all of them
+
+<img width="700" alt="Снимок экрана 2022-09-19 в 19 57 23" src="https://user-images.githubusercontent.com/5879172/191072703-82a261ec-8c4d-40fc-badb-8aff73ad2f94.png">
+<img width="700" alt="Снимок экрана 2022-09-19 в 19 57 44" src="https://user-images.githubusercontent.com/5879172/191072707-50bfc52d-c2d3-4e1d-a824-a6aa21496a39.png">
 
 
 Samples located in app module
