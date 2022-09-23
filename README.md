@@ -21,6 +21,7 @@ There is no obligation to use each component. We can emit either Actor, Bootstra
 
 <img width="700" alt="Снимок экрана 2022-09-19 в 19 57 23" src="https://user-images.githubusercontent.com/5879172/191072703-82a261ec-8c4d-40fc-badb-8aff73ad2f94.png">
 <img width="700" alt="Снимок экрана 2022-09-19 в 19 57 44" src="https://user-images.githubusercontent.com/5879172/191072707-50bfc52d-c2d3-4e1d-a824-a6aa21496a39.png">
+https://user-images.githubusercontent.com/5879172/191924824-3904bd97-984f-4569-a17f-ac1ece4dba76.gif
 
 
 Samples located in app module
@@ -29,44 +30,49 @@ Samples located in app module
 
 Simple screen with no actions. Preloads data on start
 
+![mvi-sample-1](https://user-images.githubusercontent.com/5879172/191935019-77fd5fbb-9037-458a-a885-555550280933.gif)
+
+
 ### Sample 2
 
 Screen with periodic updates based on selected currency. Simulated exception for Usd
 
-https://user-images.githubusercontent.com/5879172/182160594-676b36fc-820a-4cfb-beac-807ce7d35d96.mov
-
+![mvi-sample-2](https://user-images.githubusercontent.com/5879172/191926104-27a0b4f7-da9a-4e14-87e7-00b792160f16.gif)
 
 ### Sample 3
 
 Screen with countries list, pagination and navigation
 
-https://user-images.githubusercontent.com/5879172/182159683-c0233c1e-db4c-4c96-b524-5b7b5fccd92d.mov
+![mvi-sample-3](https://user-images.githubusercontent.com/5879172/191931212-6822099d-63e0-4359-b47d-c6ef652cb0dd.gif)
 
 
 ### Sample 4
 
 Sample of how sequence of dependant actions can be implemented: 
 
-https://user-images.githubusercontent.com/5879172/182425025-6c8f1994-b626-4d71-81fc-6d89f44416b2.mov
+![mvi-sample-4](https://user-images.githubusercontent.com/5879172/191938812-f88ccba9-c50f-4940-b554-48821901768b.gif)
 
 
 ### Sample 5
 
 Demonstrate how to you SavedStateHandle to restore last filter after Activity being killed (in demo flag "don't keep activities" is enbled)
 
+![mvi-sample-6](https://user-images.githubusercontent.com/5879172/191946969-61ad4f09-55d1-4cdf-ae26-d572b2c149f1.gif)
+
+
 ### Sample 6
 
 Demonstrate how to you SavedStateHandle to restore whole screen state after Activity being killed (in demo flag "don't keep activities" is enbled)
 
-https://user-images.githubusercontent.com/5879172/182621141-7318ef64-ebe0-4df5-a7e2-7d5fa382c0d6.mov
+![mvi-sample-6](https://user-images.githubusercontent.com/5879172/191946969-61ad4f09-55d1-4cdf-ae26-d572b2c149f1.gif)
+
 
 ### Sample 7
 
 Demonstrates how 2 independent MviFeatures can be combined inside of single ViewModel (sample 2 and sample 5)
 Note, that in real world this example is much easier to implement using simple fragment stacking
 
-https://user-images.githubusercontent.com/5879172/182635509-513d7d67-f6ff-4bd2-8f79-3ce31d578b8d.mov
-
+![mvi-sample-7](https://user-images.githubusercontent.com/5879172/191947671-09961be9-3a9c-4ef3-96af-2e7a72a4ca64.gif)
 
 
 ### Template 
